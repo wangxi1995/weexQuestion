@@ -38,23 +38,23 @@ weex的劣势
 ### 一些项目中遇到的问题
 
 #### 1. px实现响应式
-     -**每一个text标签必须单独设置font-size**，不能按照之前的逻辑父级设了子级不设
+   **每一个text标签必须单独设置font-size**，不能按照之前的逻辑父级设了子级不设
 #### 2.样式改变
-     -**如果要实现改变样式需要写成内部样式然后通过改变class来实现**，如果写了行内样式然后通过if来判断使用不同标签来达到切换样式是行不通的，真机上会出现复用情况，同理写了class然后用行内样式覆盖也是一样出现复用问题
-     **还可以通过提供的animation模块动画时间调为0完成样式的覆盖**
+   -**如果要实现改变样式需要写成内部样式然后通过改变class来实现**，如果写了行内样式然后通过if来判断使用不同标签来达到切换样式是行不通的，真机上会出现复用情况，同理写了class然后用行内样式覆盖也是一样出现复用问题
+   **还可以通过提供的animation模块动画时间调为0完成样式的覆盖**
 #### 3.textarea中oninput
-     **真机使用这个事件无法获取到框内的值并且里面没有value属性**
-     **解决方案：**
-     ```javascript
-     //1.data中设置一个对象
-     textareaObj:{},
-     //2.加载数据时给对象中添加对应个数的属性
-     for(let i= 0; i < this.lists.length; ++i){
-         let textareaValue={};
-         let store_id =this.lists[i].store_id;
-         textareaValue[store_id] ='';
-         Object.assign(this.textareaObj,textareaValue);
-     }
-     //3.查找对应属性的值并实现实时绑定
-     v-model="textareaObj[item.store_id]"
-     ```
+   **真机使用这个事件无法获取到框内的值并且里面没有value属性**
+   **解决方案：**
+   ```javascript
+   //1.data中设置一个对象
+   textareaObj:{},
+   //2.加载数据时给对象中添加对应个数的属性
+   for(let i= 0; i < this.lists.length; ++i){
+      let textareaValue={};
+      let store_id =this.lists[i].store_id;
+      textareaValue[store_id] ='';
+      Object.assign(this.textareaObj,textareaValue);
+   }
+   //3.查找对应属性的值并实现实时绑定
+   v-model="textareaObj[item.store_id]"
+   ```
