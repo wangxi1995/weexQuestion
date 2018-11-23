@@ -124,5 +124,4 @@ weex的劣势
     <div v-if ="BfMeberDetail == 0"></div>
     //如果用下面的写法可能会导致组件复用
     <div v-if ="!BfMeberDetail"></div>
-    
     ```
