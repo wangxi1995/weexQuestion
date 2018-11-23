@@ -16,7 +16,6 @@
     * textarea中的oninput
     * weex-ui中步进器的使用
     * 多个class并写三元判断
-    * weex不支持公共样式
     * weex中手机端样式显示不出原因
     * weex中的判断问题
 * weex中默认布局flex
@@ -58,3 +57,72 @@ weex的劣势
    //3.查找对应属性的值并实现实时绑定
    v-model="textareaObj[item.store_id]"
    ```
+#### 4.weex-ui中步进器的使用
+   -单个步进器毫无问题直接data里写个变量然后用提供的方法改变变量的值即可
+   **多个步进器的使用：**
+   **(1).通过ref获取到对应步进器的值，然后用提供的方法进行动态替换**
+   ```javascript
+   <wxc-stepper ref="stepper" 
+     :default-value="item1.goods_num"
+     step="1"
+     :max="item1.goods_stock_count"
+     min="1"
+     @wxcStepperValueChanged="stepperValueChange"
+     ></wxc-stepper>
+   ```
+   **(2).由于不知道点击的步进器是那一个所以我进行了无差别替换**（两层for循环是为了找到data中对应总数据变量中的值，替换了这个值页面会相应的变化）
+   ```javascript
+   stepperValueChange(e) {
+     let times = 0;
+     for (let i= 0; i < this.list.length; ++i) {
+       for (let w = 0; w < this.lists[i].cartList.length; ++w) {
+         times++;
+         if(
+           this.list[i].cartList[w].goods_num !=
+           this.$refs.stepper[times - 1].value
+         ){
+           let num = this.$refs.stepper[times - 1].value;
+           //获取数据的方法
+           this.$api(
+            "/api/cart",
+            {
+              cart_id: this.list[i].cartList[w].cart_id,
+              cart_num: num
+            },
+            res => {
+              //请求完成  status为1表示请求成功
+              if(res.status == 1){
+                this.lists[i].cartList[w].goods_num = num;
+                this.allFunction();
+              }else {
+                //modal模块中的toast
+                modal.toast({
+                  message: res.msg,
+                  duration: 1.5
+                })
+              }
+            })
+          }
+        }
+     }
+   }
+   ```
+#### 5.多个class并写三元判断
+```javascript
+  <text :class="['iconfont','icon',( acticeTab == i ? 'active' : '' )]">{{tab.icon}}</text>
+```
+#### 6.weex中手机端样式显示不出原因
+```javascript
+  //(1) 假如上一句报错，则下一句不执行（app中没有window）
+  if(window)window.addEventListener("message", this.onMessage, false);
+  this.twoBtn_bol();
+```
+#### 7.weex中的判断问题
+   **尽量使用v-if判断，不要用v-else-if,v-else!因为有可能导致样式复用！**
+    ```javascript
+    //如果判断true或false，请使用
+    <div v-if ="BfMeberDetail == 0"></div>
+    //如果用下面的写法可能会导致组件复用
+    <div v-if ="!BfMeberDetail"></div>
+    
+    ```
