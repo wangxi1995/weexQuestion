@@ -120,8 +120,8 @@ weex的劣势
 #### 7.weex中的判断问题
    **尽量使用v-if判断，不要用v-else-if,v-else!因为有可能导致样式复用！**
     ```javascript
-    //如果判断true或false，请使用
-    <div v-if ="BfMeberDetail == 0"></div>
-    //如果用下面的写法可能会导致组件复用
-    <div v-if ="!BfMeberDetail"></div>
+       //如果判断true或false，请使用
+       <div v-if ="BfMeberDetail == 0"></div>
+       //如果用下面的写法可能会导致组件复用
+       <div v-if ="!BfMeberDetail"></div>
     ```
