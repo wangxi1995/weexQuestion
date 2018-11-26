@@ -1,8 +1,12 @@
 # weexQuestion
 项目中遇到的weex，weex-ui相关的问题
+
 这里我主要说的是文档中没有，或者隐藏较深的前端问题，浅层次的问题请查阅官方文档！
-[weex官方文档](#https://weex.apache.org/cn/references/)
-[weex-ui官方文档](#https://alibaba.github.io/weex-ui/#/cn/)
+
+[weex官方文档](https://weex.apache.org/cn/references/)
+
+[weex-ui官方文档](https://alibaba.github.io/weex-ui/#/cn/)
+
 ***
 
 |Author|wangxi|
