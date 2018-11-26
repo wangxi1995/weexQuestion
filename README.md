@@ -129,4 +129,21 @@ weex的劣势
 -啰嗦几句，**Flexbox 是weex中默认且唯一的布局模型**，虽然刚开始用flex可能你会不习惯，但是请坚持使用它，它会为你带来便利！
 -大多数flex的布局方式请参考文档自行摸索，我这里说一种实用，文档中没有的布局方式
 ####1.占满剩余部分 flex:1
+
 ![flex img](img/flex.png)
+
+```javascipt
+//父盒子给绝对定位
+.wrap {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+}
+//可滚动部分设置
+.scroller {
+   flex: 1;
+}
+//底部固定高
+```
